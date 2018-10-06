@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.data.annotation.Id;
 
@@ -13,10 +15,11 @@ public class Movie implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    private String movieid;
+    private String movieId;
     @NotNull
     private String title;
     private String description;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date releaseDate;
     @NotNull
     private Actor[] actors;
@@ -38,11 +41,11 @@ public class Movie implements Serializable {
     }
 
     public String getMovieId() {
-        return id;
+        return movieId;
     }
 
-    public void setMovieId(String id) {
-        this.id = id;
+    public void setMovieId(String movieid) {
+        this.movieId = movieid;
     }
 
     public String getTitle() {

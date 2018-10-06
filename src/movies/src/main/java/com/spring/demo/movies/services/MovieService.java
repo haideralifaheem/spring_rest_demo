@@ -31,7 +31,7 @@ public class MovieService implements IMovieService {
 
         LOGGER.info("Finding a movie by ID");
 
-        return movieRepository.findMovieById(movieid);
+        return movieRepository.findByMovieId(movieid);
     }
 
     @Override

@@ -1,8 +1,11 @@
 package com.spring.demo.movies.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import org.springframework.data.annotation.Id;
 
@@ -14,17 +17,18 @@ public class Director implements Serializable {
     private String firstName;
     @NotNull
     private String lastName;
-    private int age;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date dob;
     private String gender;
 
     public Director() {
 
     }
 
-    public Director(String firstName, String lastName, int age, String gender) {
+    public Director(String firstName, String lastName, Date dob, String gender) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
+        this.dob = dob;
         this.gender = gender;
     }
 
@@ -44,12 +48,12 @@ public class Director implements Serializable {
         this.lastName = lastName;
     }
 
-    public int getAge() {
-        return age;
+    public Date getDOB() {
+        return dob;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setDOB(Date dob) {
+        this.dob = dob;
     }
 
     public String getGender() {
