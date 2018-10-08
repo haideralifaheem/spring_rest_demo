@@ -2,17 +2,24 @@ package com.spring.demo.movies.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
+import com.spring.demo.movies.Application;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
+@Document(collection = "Actors")
 public class Actor implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @Id
-    private String idActor;
+    private String actorId;
+
     @NotNull
     private String firstName;
     @NotNull
@@ -30,6 +37,14 @@ public class Actor implements Serializable {
         this.lastName = lastName;
         this.dob = dob;
         this.gender = gender;
+    }
+
+    public String getActorId() {
+        return actorId;
+    }
+
+    public void setActorId(String actorId) {
+        this.actorId = actorId;
     }
 
     public String getFirstName() {
@@ -64,4 +79,22 @@ public class Actor implements Serializable {
         this.gender = gender;
     }
 
+    public Actor findActorInDB() {
+        try {
+            Query query = new Query();
+            Criteria criteriaDefinition = Criteria.where("firstName").is(this.firstName).and("lastName")
+                    .is(this.lastName).and("dob").is(this.dob);
+
+            query.addCriteria(criteriaDefinition);
+            List<Actor> actors = Application.mongoTamplate.find(query, Actor.class);
+
+            if (actors != null && actors.size() > 0) {
+                return actors.get(0);
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

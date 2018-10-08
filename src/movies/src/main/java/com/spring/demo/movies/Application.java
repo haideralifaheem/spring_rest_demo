@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 @Configuration
 @EnableAutoConfiguration
@@ -21,8 +22,17 @@ public class Application {
 	@Autowired
 	private SpringSwaggerConfig swaggerConfig;
 
+	public static MongoTemplate mongoTamplate;
+
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		try {
+			SpringApplication.run(Application.class, args);
+			MongoConfig mongoConfig = new MongoConfig();
+
+			mongoTamplate = mongoConfig.mongoTemplate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Bean

@@ -2,6 +2,7 @@ package com.spring.demo.movies.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
@@ -9,7 +10,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "Movie")
 public class Movie implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -22,16 +26,18 @@ public class Movie implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date releaseDate;
     @NotNull
-    private Actor[] actors;
+    @DBRef
+    private List<Actor> actors;
     @NotNull
-    private Director[] directors;
+    @DBRef
+    private List<Director> directors;
     private String genre;
 
     public Movie() {
     }
 
-    public Movie(String title, String description, String genre, Date releaseDate, Actor[] actors,
-            Director[] directos) {
+    public Movie(String title, String description, String genre, Date releaseDate, List<Actor> actors,
+            List<Director> directos) {
         this.title = title;
         this.description = description;
         this.genre = genre;
@@ -80,21 +86,21 @@ public class Movie implements Serializable {
         this.releaseDate = releaseDate;
     }
 
-    public Actor[] getActors() {
+    public List<Actor> getActors() {
         return actors;
     }
 
     @Required
-    public void setActors(Actor[] actors) {
+    public void setActors(List<Actor> actors) {
         this.actors = actors;
     }
 
-    public Director[] getDirectors() {
+    public List<Director> getDirectors() {
         return directors;
     }
 
     @Required
-    public void setDirectors(Director[] directors) {
+    public void setDirectors(List<Director> directors) {
         this.directors = directors;
     }
 }

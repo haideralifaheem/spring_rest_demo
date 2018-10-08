@@ -2,17 +2,21 @@ package com.spring.demo.movies.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-
+import com.spring.demo.movies.Application;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
+@Document(collection = "Directors")
 public class Director implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    private String idDirector;
+    private String directorId;
     @NotNull
     private String firstName;
     @NotNull
@@ -30,6 +34,14 @@ public class Director implements Serializable {
         this.lastName = lastName;
         this.dob = dob;
         this.gender = gender;
+    }
+
+    public String getDirectorId() {
+        return directorId;
+    }
+
+    public void setDirectorId(String directorId) {
+        this.directorId = directorId;
     }
 
     public String getFirstName() {
@@ -62,5 +74,23 @@ public class Director implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Director findDirectorInDB() {
+        try {
+            Query query = new Query();
+            Criteria criteriaDefinition = Criteria.where("firstName").is(this.firstName).and("lastName")
+                    .is(this.lastName).and("dob").is(this.dob);
+            query.addCriteria(criteriaDefinition);
+            List<Director> directors = Application.mongoTamplate.find(query, Director.class);
+
+            if (directors != null && directors.size() > 0) {
+                return directors.get(0);
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

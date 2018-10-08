@@ -9,6 +9,4 @@ public interface IDirectorService {
 
     List<Director> findAll();
 
-    void delete(final String id);
-
 }

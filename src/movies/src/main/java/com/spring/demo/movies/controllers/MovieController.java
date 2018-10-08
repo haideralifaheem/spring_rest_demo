@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.demo.movies.model.Actor;
+import com.spring.demo.movies.model.Director;
 import com.spring.demo.movies.model.Movie;
 import com.spring.demo.movies.services.MovieService;
 import com.wordnik.swagger.annotations.Api;
@@ -33,7 +35,7 @@ public class MovieController {
 		return movie;
 	}
 
-	@ApiOperation(value = "Find Movie by ID")
+	@ApiOperation(value = "Find Movie by Title")
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "Title/{title}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Movie getbyTitle(@PathVariable(value = "title") String title) {
@@ -49,10 +51,26 @@ public class MovieController {
 		return movies;
 	}
 
+	@ApiOperation(value = "Find Actors by Movie ID")
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "findActorbyMovieId/{movieid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Actor> findActorsbyMovieId(@PathVariable(value = "movieid") String movieid) {
+		Movie movie = movieService.findById(movieid);
+		return movie.getActors();
+	}
+
+	@ApiOperation(value = "Find Directors by Movie ID")
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "findDirectosbyMovieId/{movieid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Director> findDirectorsbyMovieId(@PathVariable(value = "movieid") String movieid) {
+		Movie movie = movieService.findById(movieid);
+		return movie.getDirectors();
+	}
+
 	@ApiOperation(value = "Add a new Movie")
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Movie create(@RequestBody Movie movie) {
+	public Movie create(@RequestBody Movie movie) throws Exception {
 		Movie createdMovie = movieService.create(movie);
 		return createdMovie;
 	}

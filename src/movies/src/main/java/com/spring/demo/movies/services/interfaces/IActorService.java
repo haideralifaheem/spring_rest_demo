@@ -6,10 +6,10 @@ import com.spring.demo.movies.model.Actor;
 
 public interface IActorService {
 
-    Actor findById(final String id);
+    Actor findByActorId(final String id);
 
     List<Actor> findAll();
 
-    void delete(final String id);
+    List<Actor> findbyFirstName(final String name);
 
 }
