@@ -1,7 +1,5 @@
 package com.spring.demo.movies;
 
-import static org.hamcrest.number.OrderingComparison.greaterThan;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
