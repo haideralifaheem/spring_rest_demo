@@ -1,4 +1,4 @@
-# spring rest demo with Mongodb database
+# Spring Boot REST API with Mongodb database
 # How to get this project
 you could clone the project ,User the develop branch for developmenet and Master branch for release version
 
