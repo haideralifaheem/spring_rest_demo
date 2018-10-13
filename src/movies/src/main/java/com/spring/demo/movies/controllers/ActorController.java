@@ -43,7 +43,7 @@ public class ActorController {
     @ApiOperation(value = "Find Actors by First Name")
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "findbyFirstName/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Actor> findActorByName(@PathVariable(value = "name") String name) {
+    public List<Actor> findActorsByName(@PathVariable(value = "name") String name) {
         List<Actor> actors = actorService.findbyFirstName(name);
         return actors;
     }

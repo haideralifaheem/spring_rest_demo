@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "movies",
+                "projectName": "movies",
+                "workingDirectory": "e:\\kreait_demo\\project\\spring_rest_demo\\src\\movies",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "movies",
+                "projectName": "movies",
+                "workingDirectory": "e:\\kreait_demo\\project\\spring_rest_demo\\src\\movies",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}
