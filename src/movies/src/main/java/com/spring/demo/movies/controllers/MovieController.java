@@ -53,7 +53,7 @@ public class MovieController {
 
 	@ApiOperation(value = "Find Actors by Movie ID")
 	@ResponseStatus(HttpStatus.OK)
-	@RequestMapping(value = "findActorbyMovieId/{movieid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "findActorsbyMovieId/{movieid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Actor> findActorsbyMovieId(@PathVariable(value = "movieid") String movieid) {
 		Movie movie = movieService.findById(movieid);
 		return movie.getActors();
@@ -61,7 +61,7 @@ public class MovieController {
 
 	@ApiOperation(value = "Find Directors by Movie ID")
 	@ResponseStatus(HttpStatus.OK)
-	@RequestMapping(value = "findDirectosbyMovieId/{movieid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "findDirectorsbyMovieId/{movieid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Director> findDirectorsbyMovieId(@PathVariable(value = "movieid") String movieid) {
 		Movie movie = movieService.findById(movieid);
 		return movie.getDirectors();
